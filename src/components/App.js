@@ -6,7 +6,7 @@ import { GlobalStyle } from "./styles/GlobalStyle";
 
 const App = () => (
   <div>
-    <Header /> <Home /> <GlobalStyle/>
+    <Header /> <Home /> <GlobalStyle />
   </div>
 );
 
