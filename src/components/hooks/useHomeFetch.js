@@ -1,6 +1,16 @@
 import { useState, useEffect} from 'react';
 import { API_URL, API_KEY } from '../../config'
 
+// Simplest example of a Hook
+// export const useMockFetch = () => {
+//     const [state, setState] = useState({movies: ["After Earth"]})
+//     useEffect(() => {
+//         setState({ movies: ["Mock Movies"]})
+//     }, [])
+
+//     return {state} ;
+// }
+
 export const useHomeFetch = () => {
 
     const [state, setState] = useState({ movies: [] })
