@@ -5,6 +5,8 @@ import {
   IMAGE_BASE_URL,
   BACKDROP_SIZE,
   POSTER_SIZE,
+  POPULAR_BASE_URL,
+  SEARCH_BASE_URL,
 } from "../config";
 import { NoImage } from "./images/no_image.jpg";
 
@@ -30,13 +32,18 @@ const Home = () => {
   ] = useHomeFetch();
   const [searchTerm, setSearchTerm] = useState("");
 
+  const searchMovies = (search) => {
+    const endpoint = search ? SEARCH_BASE_URL + search : POPULAR_BASE_URL
+
+    setSearchTerm(search);
+    fetchMovies(endpoint);
+  };
+
   const loadMoreMovies = () => {
-    const searchEndPoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${
+    const searchEndPoint = `${SEARCH_BASE_URL}${searchTerm}&page=${
       currentPage + 1
     }`;
-    const popularEndPoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${
-      currentPage + 1
-    }`;
+    const popularEndPoint = `${POPULAR_BASE_URL}&page=${currentPage + 1}`;
 
     const endPoint = searchTerm ? searchEndPoint : popularEndPoint;
 
@@ -49,13 +56,14 @@ const Home = () => {
   console.log("State: ", movies);
   return (
     <>
+    {!searchTerm && ( 
       <HeroImage
         image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${heroImage.backdrop_path}`}
         title={heroImage.original_title}
         text={heroImage.overview}
-      />
+      />)}
 
-      <SearchBar />
+      <SearchBar callback={searchMovies} />
       <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
         {movies.map((movie) => (
           <MovieThumbs

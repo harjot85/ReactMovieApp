@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import { API_URL, API_KEY } from '../../config'
+import { POPULAR_BASE_URL } from '../../config'
 
 // Simplest example of a Hook
 // export const useMockFetch = () => {
@@ -46,7 +46,7 @@ export const useHomeFetch = () => {
     
     useEffect(() => {
         // if 401, display message
-        fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+        fetchMovies(POPULAR_BASE_URL);
     }, [])
 
     return [{ state, loading, error}, fetchMovies]
