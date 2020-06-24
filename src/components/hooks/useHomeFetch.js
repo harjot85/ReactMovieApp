@@ -25,7 +25,7 @@ export const useHomeFetch = () => {
 
         try{
             const result = await (await fetch(endpoint)).json();
-            console.log("Result: ", result)
+            
             setState(prev => ({
                 ...prev,
                 movies: 
