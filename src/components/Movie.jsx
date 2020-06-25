@@ -6,21 +6,27 @@ import Actor from "./elements/Actor";
 import Grid from "./elements/Grid";
 import Spinner from "./elements/Spinner";
 
-import {useMovieFetch} from "./hooks/useMovieFetch";
+import { useMovieFetch } from "./hooks/useMovieFetch";
 
 const Movie = ({ movieId }) => {
   const [movie, loading, error] = useMovieFetch(movieId);
   console.log(movie);
 
-  if(error) return <div>Something went wrong...</div>
-  if(loading) return <Spinner/>
+  if (error) return <div>Something went wrong...</div>;
+  if (loading) return <Spinner />;
   return (
     <>
-      <Navigation movieName={movie.title}/>
-      <MovieInfo movie={movie}/>
-      <MovieBarInfo />
-      <Grid>
-        <Actor />
+      <Navigation movieName={movie.title} />
+      <MovieInfo movie={movie} />
+      <MovieBarInfo
+        time={movie.runtime}
+        budget={movie.budget}
+        revenue={movie.revenue}
+      />
+      <Grid header="Actors">
+        {movie.actors.map((actor) => (
+          <Actor key={actor.credit_id} actor={actor} />
+        ))}
         <Spinner />
       </Grid>
     </>
